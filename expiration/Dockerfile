@@ -1,0 +1,25 @@
+FROM node:20 AS package-installer
+
+RUN apt update && apt upgrade -y --no-install-recommends
+
+RUN npm install -g typescript
+
+WORKDIR /app
+
+COPY package*.json /app/
+
+RUN npm ci --include=dev
+
+FROM node:20-slim
+
+WORKDIR /app
+
+COPY --from=package-installer /app/node_modules /app/node_modules
+
+COPY . .
+
+# USER node
+
+EXPOSE 3000
+
+CMD [ "npm", "start" ]

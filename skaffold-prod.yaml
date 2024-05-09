@@ -1,0 +1,38 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s-prod/*.yaml
+build:
+  local:
+    push: true
+  tagPolicy:
+    dateTime:
+      format: "2024-01-01"
+      timezone: "Local"
+  artifacts:
+    - image: au.icr.io/microservices-tut/ticketing-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+    - image: au.icr.io/microservices-tut/ticketing-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+    - image: au.icr.io/microservices-tut/ticketing-tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+    - image: au.icr.io/microservices-tut/ticketing-orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+    - image: au.icr.io/microservices-tut/ticketing-expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+    - image: au.icr.io/microservices-tut/ticketing-payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
