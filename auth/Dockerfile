@@ -1,4 +1,4 @@
-FROM node:20 AS package-installer
+FROM node:lts AS package-installer
 
 RUN apt update && apt upgrade -y --no-install-recommends
 
@@ -10,12 +10,13 @@ COPY package*.json ./
 
 RUN npm ci --include=dev
 
-FROM node:20-slim
+FROM node:lts-slim
+
+RUN apt update && apt upgrade -y --no-install-recommends
 
 WORKDIR /app
 
 COPY --from=package-installer /app/node_modules /app/node_modules
-
 COPY . .
 
 # USER node
