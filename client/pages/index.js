@@ -3,7 +3,7 @@ import Link from "next/link";
 const LandingView = ({ tickets }) => {
   const ticketsList = tickets.map((t) => (
     <tr key={t.id}>
-      <td>{t.title}</td>
+      <td colSpan={2}>{t.title}</td>
       <td>{t.price}</td>
       <td>
         <Link href="/tickets/[ticketId]" as={`/tickets/${t.id}`}>
@@ -14,20 +14,16 @@ const LandingView = ({ tickets }) => {
   ));
 
   return (
-    <>
-      <Link href="/tickets/new">new ticket</Link>
-
-      <table className="table m-auto">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>{ticketsList}</tbody>
-      </table>
-    </>
+    <table className="table">
+      <thead>
+        <tr>
+          <th colSpan={2}>Title</th>
+          <th>Price</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>{ticketsList}</tbody>
+    </table>
   );
 };
 

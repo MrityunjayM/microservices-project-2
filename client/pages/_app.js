@@ -10,7 +10,7 @@ const App = ({ Component, pageProps, currentUser }) => {
         <title>Microservices Project - 2 | Ticketing App</title>
       </Head>
       <Header currentUser={currentUser} />
-      <div className="container mt-2">
+      <div className="container is-max-desktop mt-2">
         <Component currentUser={currentUser} {...pageProps} />
       </div>
     </>
