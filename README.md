@@ -1,2 +1,3 @@
-# microservices-project-2-common
-Common modules for microservices-project-2
+# Microservices-Project-2
+
+_Microservices Project 2: developed following udemy course **Microservices with Node JS and React** By Stephen Grider_

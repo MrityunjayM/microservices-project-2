@@ -1,0 +1,75 @@
+POST https://ticketing.dev/api/users/signup
+Content-Type: application/json
+
+{
+    "email": "test01@ticketing.dev",
+    "password": "pass1234"
+}
+
+###
+GET https://ticketing.dev/api/users/currentuser
+Cookie: session=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalkyTTJJelltSTRNak5tWVdFNE9XSmtaREl5TW1ZMFpTSXNJbVZ0WVdsc0lqb2lkR1Z6ZERBeFFHMXpMbTF5YVhSNWRXNXFZWGt1ZEdWamFDSXNJbWxoZENJNk1UY3hOVEUxTnprME5Dd2laWGh3SWpveE56RTFNalEwTXpRMGZRLmRpWkJQd1RuaFhkSDlDMWZ1TWRWSE96a0lGeEV2U2FZT0xiV2JUeEdkR1kifQ==; path=/; secure; httponlyz
+
+### List Tickets
+GET https://ticketing.dev/api/tickets
+
+### Create Ticket
+POST https://ticketing.dev/api/tickets
+Content-Type: application/json
+Cookie: session=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalkyTTJJelltSTRNak5tWVdFNE9XSmtaREl5TW1ZMFpTSXNJbVZ0WVdsc0lqb2lkR1Z6ZERBeFFHMXpMbTF5YVhSNWRXNXFZWGt1ZEdWamFDSXNJbWxoZENJNk1UY3hOVEUxTnprME5Dd2laWGh3SWpveE56RTFNalEwTXpRMGZRLmRpWkJQd1RuaFhkSDlDMWZ1TWRWSE96a0lGeEV2U2FZT0xiV2JUeEdkR1kifQ==; path=/; secure; httponly
+
+{
+    "title": "Ticket - 1",
+    "price": 4.99
+}
+
+### Get Ticket
+GET https://ticketing.dev/api/tickets/66379ad6c826a08f81c1c38c
+
+### Update Ticket
+PUT https://ticketing.dev/api/tickets/66379ad6c826a08f81c1c38c
+Content-Type: application/json
+Cookie: session=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalkyTTJJelltSTRNak5tWVdFNE9XSmtaREl5TW1ZMFpTSXNJbVZ0WVdsc0lqb2lkR1Z6ZERBeFFHMXpMbTF5YVhSNWRXNXFZWGt1ZEdWamFDSXNJbWxoZENJNk1UY3hOVEUxTnprME5Dd2laWGh3SWpveE56RTFNalEwTXpRMGZRLmRpWkJQd1RuaFhkSDlDMWZ1TWRWSE96a0lGeEV2U2FZT0xiV2JUeEdkR1kifQ==; path=/; secure; httponly
+
+{
+    "title": "Ticket - 1",
+    "price": 5.99
+}
+
+### List Orders
+GET https://ticketing.dev/api/orders
+Content-Type: application/json
+Cookie: session=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalkyTTJJelltSTRNak5tWVdFNE9XSmtaREl5TW1ZMFpTSXNJbVZ0WVdsc0lqb2lkR1Z6ZERBeFFHMXpMbTF5YVhSNWRXNXFZWGt1ZEdWamFDSXNJbWxoZENJNk1UY3hOVEUxTnprME5Dd2laWGh3SWpveE56RTFNalEwTXpRMGZRLmRpWkJQd1RuaFhkSDlDMWZ1TWRWSE96a0lGeEV2U2FZT0xiV2JUeEdkR1kifQ==; path=/; secure; httponly
+
+### Create an Orders
+POST https://ticketing.dev/api/orders
+Content-Type: application/json
+Cookie: session=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalkyTTJJelltSTRNak5tWVdFNE9XSmtaREl5TW1ZMFpTSXNJbVZ0WVdsc0lqb2lkR1Z6ZERBeFFHMXpMbTF5YVhSNWRXNXFZWGt1ZEdWamFDSXNJbWxoZENJNk1UY3hOVEUxTnprME5Dd2laWGh3SWpveE56RTFNalEwTXpRMGZRLmRpWkJQd1RuaFhkSDlDMWZ1TWRWSE96a0lGeEV2U2FZT0xiV2JUeEdkR1kifQ==; path=/; secure; httponly
+
+{
+    "ticketId": "663b3167f5fb85bc6ef7d30d"
+}
+
+### Get an Order
+GET https://ticketing.dev/api/orders/663b3cde5f7375c006ff1c19
+
+### Cancel an Order
+DELETE https://ticketing.dev/api/orders/66379b0aa9eaa4d69dcaa6b2
+
+### Make payment to an invalid order
+POST https://ticketing.dev/api/payments
+Content-Type: application/json
+
+{
+    "orderId": "66379ad6c826a08f81c1c38c",
+    "token": "bvdjkferfhsjfjkf3432jknxkfvdfsd"
+}
+
+### Make payment to a correct order
+POST https://ticketing.dev/api/payments
+Content-Type: application/json
+
+{
+    "orderId": "66379b0aa9eaa4d69dcaa6b2",
+    "token": "bvdjkferfhsjfjkf3432jknxkfvdfsd"
+}

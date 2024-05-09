@@ -1,0 +1,29 @@
+FROM node:20 AS provider
+
+RUN apt update && apt upgrade -y --no-install-recommends
+
+RUN npm install -g typescript
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm install
+
+FROM node:20-slim
+
+ENV TZ=Asia/Kolkata
+ENV NODE_ENV=development
+ENV NEXT_PUBLIC_HOST='https://ticketing.dev'
+
+WORKDIR /app
+
+COPY --from=provider /app/node_modules /app/node_modules
+
+RUN npx next telemetry --disable
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "dev" ]
