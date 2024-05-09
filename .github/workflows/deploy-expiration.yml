@@ -1,0 +1,24 @@
+name: deploy-expiration-service
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      -  expiration/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dprosper/ic-setup-cli@v0.1.2
+        with:
+          API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+          REGION: au-syd
+          RESOURCE_GROUP: Default
+          INSTALL_PLUGINS: container-registry, container-service
+      - run: ibmcloud cr login
+      - run: docker build -t au.icr.io/microservices-tut/ticketing-expiration:latest expiration && docker push au.icr.io/microservices-tut/ticketing-expiration:latest
+      - run: ibmcloud ks cluster config -c ${{ secrets.CLUSTER_ID }}
+      - run: kubectl rollout restart deployment expiration-depl
