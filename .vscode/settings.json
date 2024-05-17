@@ -1,5 +1,9 @@
 {
     "yaml.schemas": {
         "https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs-v1/content/en/schemas/v2alpha3.json": "file:///Users/Shared/microservices/project_2/skaffold.yaml"
+    },
+    "prettier.printWidth": 125,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
     }
 }
