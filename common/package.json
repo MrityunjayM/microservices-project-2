@@ -1,8 +1,9 @@
 {
   "name": "@learndev24/common",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Common module for the LearnDev23 microservices project-2",
   "main": "./build/index.js",
+  "type": "module",
   "types": "./build/index.d.ts",
   "files": [
     "build/**/*"
