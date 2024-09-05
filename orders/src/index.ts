@@ -4,6 +4,7 @@ import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
 import {
   ExpirationCompleteListener,
+  PaymentFailedListener,
   TicketCreatedListener,
   TicketUpdatedListener,
 } from "./events/listeners";
@@ -26,11 +27,7 @@ const start = async () => {
   }
 
   try {
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
+    await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, process.env.NATS_URL);
 
     // exit gracefully on error
     natsWrapper.client.on("close", () => {
@@ -44,6 +41,7 @@ const start = async () => {
 
     new TicketCreatedListener(natsWrapper.client).listen();
     new TicketUpdatedListener(natsWrapper.client).listen();
+    new PaymentFailedListener(natsWrapper.client).listen();
     new ExpirationCompleteListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
