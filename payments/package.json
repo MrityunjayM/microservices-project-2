@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@learndev24/common": "^1.0.12",
+    "@learndev24/common": "^1.0.17",
     "cookie-session": "^2.1.0",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
