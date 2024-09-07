@@ -1,4 +1,4 @@
-FROM node:20 AS package-installer
+FROM node:22 AS package-installer
 
 RUN apt update && apt upgrade -y --no-install-recommends
 
@@ -6,11 +6,11 @@ RUN npm install -g typescript
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json /app/
 
 RUN npm ci --include=dev
 
-FROM node:20-slim
+FROM node:22-slim
 
 WORKDIR /app
 
