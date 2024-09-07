@@ -9,7 +9,7 @@ export default ({ req }) => {
     return axios.create({
       // baseURL: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
       baseURL: BASE_URL,
-      headers: { ...req.headers, Host: "ticketing.dev" },
+      headers: { ...req.headers },
     });
   } else {
     // We must be on the browser
