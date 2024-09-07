@@ -9,15 +9,16 @@ RUN npm install
 
 FROM node:22 AS builder
 
+ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV TZ=Asia/Kolkata
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_HOST='https://ticketing.mrityunjay.tech'
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
 WORKDIR /app
 
 COPY --from=package-installer /app/node_modules /app/node_modules
-
 COPY . .
 RUN npm run build
 
