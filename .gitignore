@@ -135,3 +135,6 @@ ssl_cert_gen.sh
 
 # DS_Store on Mac
 **.DS_Store
+
+# exclude any secret files
+**/*secret.yaml
