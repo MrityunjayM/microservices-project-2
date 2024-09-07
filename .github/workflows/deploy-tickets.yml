@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dprosper/ic-setup-cli@v0.1.2
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
         with:
-          API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
-          REGION: au-syd
-          RESOURCE_GROUP: Default
-          INSTALL_PLUGINS: container-registry, container-service
-      - run: ibmcloud cr login
-      - run: docker build -t au.icr.io/microservices-tut/ticketing-tickets:latest tickets && docker push au.icr.io/microservices-tut/ticketing-tickets:latest
-      - run: ibmcloud ks cluster config -c ${{ secrets.CLUSTER_ID }}
-      - run: kubectl rollout restart deployment tickets-depl
+          registry: ${{ secrets.CR }}
+          username: ${{ secrets.CR_USERNAME }}
+          password: ${{ secrets.CR_PASSWORD }}
+      # Run commands
+      - run: |
+          docker build -t ghcr.io/mrityunjaym/ticketing-tickets:latest tickets
+          docker push ghcr.io/mrityunjaym/ticketing-tickets:latest
+      # - run: kubectl rollout restart deployment tickets-depl
