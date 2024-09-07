@@ -1,7 +1,9 @@
 import "bulma/css/bulma.css";
 import Head from "next/head";
-import buildClient from "../api/build-client";
+import { Suspense } from "react";
 import Header from "../components/header";
+import Loading from "./loading";
+import buildClient from "../api/build-client";
 
 const App = ({ Component, pageProps, currentUser }) => {
   return (
@@ -10,8 +12,10 @@ const App = ({ Component, pageProps, currentUser }) => {
         <title>Microservices Project - 2 | Ticketing App</title>
       </Head>
       <Header currentUser={currentUser} />
-      <div className="container is-max-desktop mt-2">
-        <Component currentUser={currentUser} {...pageProps} />
+      <div className="container is-fluid is-max-desktop mt-2">
+        <Suspense fallback={<Loading />}>
+          <Component currentUser={currentUser} {...pageProps} />
+        </Suspense>
       </div>
     </>
   );

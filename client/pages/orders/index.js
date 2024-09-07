@@ -2,7 +2,7 @@ const OrdersList = ({ orders }) => {
   const orderRows = orders.map((o) => (
     <tr key={o.id}>
       <td>{o.ticket.title}</td>
-      <td>{o.ticket.price}</td>
+      <td>&#8377;{o.ticket.price}</td>
       <td>{o.status}</td>
       <td>{new Date(o.expiresAt).toLocaleString("en-IN")}</td>
     </tr>

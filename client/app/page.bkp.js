@@ -1,7 +1,7 @@
 import TicketTile from "../components/ticket-tile";
 
 const LandingView = ({ tickets }) => {
-  const ticketsList = tickets.map((t) => <TicketTile ticket={t} key={t.id} />);
+  const ticketsList = tickets.map((t) => <TicketTile ticket={t} />);
 
   return (
     <div className="is-flex is-flex-wrap-wrap" style={{ gap: "10px" }}>

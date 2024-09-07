@@ -3,9 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../../components/checkout-form";
 
-const stripe = loadStripe(
-  "pk_test_51PD8pYSFAbrYC1aBRRPmwi7ArI8cG87273vRRmZyxg2Z1gW3TRplZEEUAdyOfmhWB1DSdUshAlH1aVD0zCOgOyDw00ZzwANqIq"
-);
+const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "");
 
 const ShowOrder = ({ order, paymentInfo, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
@@ -34,9 +32,11 @@ const ShowOrder = ({ order, paymentInfo, currentUser }) => {
       <h2>title: {order.ticket.title}</h2>
       <h4>price: {order.ticket.price}</h4>
       <h4>status: {order.status}</h4>
-      <h4>
-        expires in: <em>{timeLeft} seconds</em>
-      </h4>
+      {timeLeft > 0 ? (
+        <h4>
+          expires in: <em>{timeLeft} seconds</em>
+        </h4>
+      ) : null}
 
       <Elements
         stripe={stripe}

@@ -12,23 +12,29 @@ const ShowTicket = ({ ticket }) => {
     onSuccess: (order) => Router.push("/orders/[orderId]", `/orders/${order.id}`),
   });
   return (
-    <div>
-      <h2>title: {ticket.title}</h2>
-      <h4>price: ${ticket.price}</h4>
+    <section className="section">
+      <h1 className="title">{ticket.title}</h1>
+      <p className="subtitle">&#8377;{ticket.price}</p>
 
-      {ticket?.orderId && (
-        <div>
-          <Link href="/orders/[orderId]" as={`/orders/${ticket.orderId}`}>
-            see order
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium vel itaque qui iste et fugiat consequatur nisi
+        animi rerum maiores error eveniet eligendi ipsa adipisci doloremque praesentium, necessitatibus modi iusto.
+      </p>
+
+      <div className="mt-3">
+        {ticket.orderId ? (
+          <Link href="/orders/[orderId]" as={`/orders/${ticket.orderId}`} className="button is-link">
+            See Order Details
           </Link>
-        </div>
-      )}
+        ) : (
+          <button className="button is-info" onClick={doRequest}>
+            Make Order
+          </button>
+        )}
+      </div>
 
       {errors}
-      <button className="button" onClick={doRequest}>
-        order
-      </button>
-    </div>
+    </section>
   );
 };
 

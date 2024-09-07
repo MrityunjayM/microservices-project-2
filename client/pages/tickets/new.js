@@ -1,16 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
 
 const NewTicket = ({}) => {
-  const titleRef = useRef("");
-  const priceRef = useRef("");
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
     body: {
-      title: titleRef.current.value,
-      price: priceRef.current.value,
+      title: title,
+      price: price,
     },
     onSuccess: (ticket) => Router.push("/"),
   });
@@ -18,7 +19,7 @@ const NewTicket = ({}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!titleRef.current.value || !priceRef.current.value) {
+    if (!title || !price) {
       return;
     }
 
@@ -26,7 +27,7 @@ const NewTicket = ({}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ maxWidth: "640px" }}>
       <div className="field">
         <label htmlFor="title" className="label">
           Title
@@ -35,7 +36,8 @@ const NewTicket = ({}) => {
           <input
             type="text"
             className="input"
-            ref={titleRef}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Give a title, e.g: movie or concert"
           />
         </div>
@@ -48,7 +50,8 @@ const NewTicket = ({}) => {
           <input
             type="number"
             className="input"
-            ref={priceRef}
+            value={price}
+            onChange={(e) => setPrice(e.target.valueAsNumber)}
             placeholder="Enter a price(in dollars), e.g. 35"
           />
         </div>
@@ -56,7 +59,7 @@ const NewTicket = ({}) => {
 
       {errors}
 
-      <button type="submit" className="button">
+      <button type="submit" className="button is-info">
         submit
       </button>
     </form>
